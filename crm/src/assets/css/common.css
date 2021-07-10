@@ -57,6 +57,14 @@
   border-bottom: 1px solid #d8d7e4;
 }
 
+.table-buttonicon{
+  font-size: 20px;   
+}
+
+.table-buttonicon span{
+  cursor: pointer;
+}
+
 li {
   display: block;
   transition-duration: 0.5s;
