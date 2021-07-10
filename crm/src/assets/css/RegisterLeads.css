@@ -1,0 +1,55 @@
+.row{
+    margin: 0 !important;
+}
+
+#registrationdiv{
+    margin: 35px auto 0 auto !important;
+}
+
+#registrationdiv .title h3,#tbldiv .title h3{
+    margin: 0 !important;
+    padding: 20px 0 30px 0;
+}
+
+.table-responsive {
+    display: inline-table;
+}
+
+#tbldiv{
+    width: 100%;
+    margin: 35px auto 0 auto !important;
+}
+
+.btn-width{
+    border-radius: 0 !important;
+    width: 160px;
+    margin-top:20px;
+}
+
+#content{
+    padding: 10px 40px 30px 40px;
+}
+.has-error{
+    color: red;
+}
+.has-error input, .has-error select, .has-error textarea{
+    border:1px solid red;
+    color: red;
+}
+
+#profile-border{border-bottom: 1px solid #d8d7e4;}
+
+@media only screen and (max-width:460px){
+   
+    #tbldiv{
+        width: auto;
+        margin: 35px auto 0 auto !important;
+    }
+
+    .table-responsive {
+        display: block;
+    }
+    #sidebarCollapse{
+        margin-bottom: 0  !important;
+    }
+}
