@@ -1,10 +1,11 @@
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useRef } from "react";
 import AddEmployee from "./add-employee";
 import UpdateEmployee from "./update-employee";
 
 const EmployeeForm = (props) => {
 
-    const [employee, setEmployee] = useState(null);
+    const addEmployeeChildRef = useRef();
+    const updateEmployeeChildRef = useRef();
 
     const first_name = useRef();
     const last_name = useRef();
@@ -18,10 +19,25 @@ const EmployeeForm = (props) => {
     const address = useRef();
     const zipcode = useRef();
 
-    const submitEmployeeHandler = (event) => {
+    if (props.formDataForUpdate !== null) {
+        console.log(props.formDataForUpdate);
+        first_name.current.value = props.formDataForUpdate.first_name;
+        last_name.current.value = props.formDataForUpdate.last_name;
+        email.current.value = props.formDataForUpdate.email;
+        mobile.current.value = props.formDataForUpdate.mobile;
+        designation.current.value = props.formDataForUpdate.designation;
+        city_id.current.value = props.formDataForUpdate.city_id;
+        state.current.value = props.formDataForUpdate.state_id;
+        country.current.value = props.formDataForUpdate.country_id;
+        gender.current.value = props.formDataForUpdate.gender;
+        address.current.value = props.formDataForUpdate.address;
+        zipcode.current.value = props.formDataForUpdate.zipcode;
+    }
+
+    const submitEmployeeHandler = (event, form) => {
         event.preventDefault();
 
-       const employeeData = {
+        const employeeData = {
             first_name: first_name.current.value,
             last_name: last_name.current.value,
             email: email.current.value,
@@ -32,8 +48,26 @@ const EmployeeForm = (props) => {
             address: address.current.value,
             zipcode: zipcode.current.value
         }
-        setEmployee(employeeData);
-        
+
+        if (props.formDataForUpdate !== null) {
+            updateEmployeeChildRef.current.updateEmployee(employeeData, props.formDataForUpdate.employee_id);
+
+        } else {
+            addEmployeeChildRef.current.createEmployee(employeeData);
+        }
+
+        first_name.current.value = "";
+        last_name.current.value = "";
+        email.current.value = "";
+        mobile.current.value = "";
+        designation.current.value = "";
+        city_id.current.value = 'null';
+        gender.current.value = 'null';
+        gender.current.value = 'null';
+        state.current.value = 'null';
+        country.current.value = 'null';
+        address.current.value = "";
+        zipcode.current.value = "";
     }
 
     return (
@@ -164,8 +198,8 @@ const EmployeeForm = (props) => {
                                             Address is required
                                         </span > */}
                                     </div >
-                                    {!props.isUpdate && <AddEmployee formData={employee} />}
-                                    {props.isUpdate && <UpdateEmployee />}
+                                    {!props.isUpdate && <AddEmployee ref={addEmployeeChildRef} />}
+                                    {props.isUpdate && <UpdateEmployee ref={updateEmployeeChildRef} />}
                                 </div >
                             </form >
                         </div >

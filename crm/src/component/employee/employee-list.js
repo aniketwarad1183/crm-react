@@ -1,31 +1,36 @@
 import { Fragment, useEffect, useState } from "react";
 import EmployeeForm from "./employee-form";
-import { getEmployee } from '../../services/employee';
+import { deleteEmployee, getEmployee, getSingleEmployee } from '../../services/employee';
 
 const EmployeeList = () => {
 
-    const [addForm, setAddForm] = useState(false);
+    const [addForm, setAddForm] = useState(null);
     const [employee, setEmployee] = useState([]);
-    
+    const [updatedFormData, setUpdatedFormData] = useState(null);
+
     const addEmployeeForm = () => {
+        setAddForm(false);
+    }
+
+    const updateEmployeeHandler = async (id) => {
+        const data = await getSingleEmployee(id);
+        setUpdatedFormData(data);
         setAddForm(true);
     }
 
-    const updateEmployeeHandler = (id) => {
-        console.log(id);
-    }
-
-    const deleteEmployeeHandler = (id) => {
-        console.log(id);
+    const deleteEmployeeHandler = async (id) => {
+        const data = await deleteEmployee(id);
+        if (data === true) {
+            alert('Employee deleted');
+        }
     }
 
     useEffect(() => {
-
         const fetchEmployee = async () => {
             const data = await getEmployee();
             let index = 1;
             const tblEmployee = [];
-            data.map((item) => {
+            for (const item of data.items) {
                 const temp = (
                     <tr key={item.employee_id}>
                         <td>{index++}</td>
@@ -42,7 +47,7 @@ const EmployeeList = () => {
                         </td>
                     </tr>);
                 tblEmployee.push(temp);
-            })
+            }
             setEmployee(tblEmployee);
         }
         fetchEmployee();
@@ -81,7 +86,7 @@ const EmployeeList = () => {
                     </table>
                 </div>
             </div>
-            {addForm && <EmployeeForm isUpdate={false} />}
+            <EmployeeForm isUpdate={addForm} formDataForUpdate={updatedFormData} />
         </Fragment>
     );
 }
