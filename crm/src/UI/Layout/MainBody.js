@@ -1,5 +1,6 @@
-import {  Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Employee from "../../pages/employee/employee";
+import Lead from "../../pages/lead/lead";
 
 const MainBody = () => {
     return (
@@ -12,12 +13,15 @@ const MainBody = () => {
                 <Route path='/employee'>
                     <Employee />
                 </Route>
+                <Route path='/lead'>
+                    <Lead />
+                </Route>
                 <Route path='*'>
 
                 </Route>
             </Switch>
         </div>
     );
-}
+};
 
 export default MainBody;
