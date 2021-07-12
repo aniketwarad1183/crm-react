@@ -1,23 +1,19 @@
-import { useEffect, useState } from "react";
+import { forwardRef, useImperativeHandle } from "react";
 import { createLead } from "../../services/lead";
 
-const AddLead = (props) => {
+const AddLead = forwardRef((props, ref) => {
 
     let lead = props.formData;
 
-    useEffect(() => {
-        if (lead !== null) {
-            const createEmloyee = async () => {
-                const response = await createLead(props.formData);
-                if (response === true) {
-                    alert('Lead added successfully');
-                }
+    useImperativeHandle(ref, () => ({
+        async createLead(employeeData) {
+            const response = await createLead(employeeData);
+            if (response === true) {
+                alert('Lead added successfully');
+                props.callGet();
             }
-            createEmloyee();
-            lead = null;
         }
-    }, [lead]);
-
+    }));
 
     return (
         <div className={"col-sm-12 form-group text-right"} >
@@ -25,6 +21,6 @@ const AddLead = (props) => {
             <button type="submit" className={"btn btn-primary btn-width"}>Register</button >
         </div >
     );
-}
+});
 
 export default AddLead;

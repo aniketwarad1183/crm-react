@@ -4,7 +4,8 @@ import UpdateLead from "./update-lead";
 
 const LeadForm = (props) => {
 
-    const [lead, setLead] = useState(null);
+    const addLeadChildRef = useRef();
+    const updateLeadChildRef = useRef();
 
     const first_name = useRef();
     const last_name = useRef();
@@ -16,6 +17,21 @@ const LeadForm = (props) => {
     const gender = useRef();
     const address = useRef();
     const zipcode = useRef();
+
+    if (props.formDataForUpdate !== null) {
+        console.log(props.formDataForUpdate);
+        first_name.current.value = props.formDataForUpdate.first_name;
+        last_name.current.value = props.formDataForUpdate.last_name;
+        email.current.value = props.formDataForUpdate.email;
+        mobile.current.value = props.formDataForUpdate.mobile;
+        city_id.current.value = props.formDataForUpdate.city_id;
+        state.current.value = props.formDataForUpdate.state_id;
+        country.current.value = props.formDataForUpdate.country_id;
+        gender.current.value = props.formDataForUpdate.gender;
+        address.current.value = props.formDataForUpdate.address;
+        zipcode.current.value = props.formDataForUpdate.zipcode;
+    }
+
 
     const submitLeadHandler = (event) => {
         event.preventDefault();
@@ -30,7 +46,23 @@ const LeadForm = (props) => {
             address: address.current.value,
             zipcode: zipcode.current.value
         };
-        setLead(leadData);
+        if (props.formDataForUpdate !== null) {
+            updateLeadChildRef.current.updateLead(leadData, props.formDataForUpdate.lead_id);
+
+        } else {
+            addLeadChildRef.current.createLead(leadData);
+        }
+
+        first_name.current.value = "";
+        last_name.current.value = "";
+        email.current.value = "";
+        mobile.current.value = "";
+        city_id.current.value = 'null';
+        gender.current.value = 'null';
+        state.current.value = 'null';
+        country.current.value = 'null';
+        address.current.value = "";
+        zipcode.current.value = "";
     };
 
     return (
@@ -110,8 +142,8 @@ const LeadForm = (props) => {
                                         <select className={"form-control"} ref={state}>
                                             <option value='null'>-- Select State --</option>
                                             <option value="1">Maharashtra</option>
-                                            <option value="2">Gujrat</option>
-                                            <option value="3">Panjab</option>
+                                            <option value="2">Gujarat</option>
+                                            <option value="3">Punjab</option>
                                             <option value="4">Bihar</option>
                                         </select >
                                         {/* <span  >
@@ -150,8 +182,8 @@ const LeadForm = (props) => {
                                             Address is required
                                         </span > */}
                                     </div >
-                                    {!props.isUpdate && <AddLead formData={lead} />}
-                                    {props.isUpdate && <UpdateLead />}
+                                    {!props.isUpdate && <AddLead ref={addLeadChildRef} />}
+                                    {props.isUpdate && <UpdateLead ref={updateLeadChildRef} />}
                                 </div >
                             </form >
                         </div >

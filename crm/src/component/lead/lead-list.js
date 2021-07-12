@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import LeadForm from "./lead-form";
-import { getLead } from '../../services/lead';
+import { getLead, getSingleLead, deleteLead } from '../../services/lead';
 import React from 'react';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
@@ -10,17 +10,24 @@ const LeadList = () => {
 
     const [addForm, setAddForm] = useState(false);
     const [lead, setLead] = useState([]);
+    const [updatedFormData, setUpdatedFormData] = useState(null);
 
     const addLeadForm = () => {
         setAddForm(true);
     };
 
-    const updateLeadHandler = (id) => {
-        console.log(id);
+    const updateLeadHandler = async (id) => {
+        const data = await getSingleLead(id);
+        setUpdatedFormData(data);
+        setAddForm(true);
     };
 
-    const deleteLeadHandler = (id) => {
-        console.log(id);
+    const deleteLeadHandler = async (id) => {
+        const data = await deleteLead(id);
+        if (data === true) {
+            alert('Lead deleted successfully!');
+        }
+        window.location.reload(true);
     };
 
     useEffect(() => {
@@ -83,7 +90,7 @@ const LeadList = () => {
                     </table>
                 </div>
             </div>
-            {addForm && <LeadForm isUpdate={false} />}
+            <LeadForm isUpdate={addForm} formDataForUpdate={updatedFormData} />
         </Fragment>
     );
 };

@@ -4,7 +4,7 @@ export async function getLead() {
     const response = await fetch(url);
 
     if (!response.ok) {
-        alert('something went wrong');
+        alert('Something went wrong');
     }
 
     const data = await response.json();
@@ -17,6 +17,14 @@ export async function getLead() {
     return lead;
 }
 
+export async function getSingleLead(id) {
+    const response = await fetch(url + '/' + id);
+    if (!response.ok) {
+        alert('Something went wrong!');
+    }
+    const data = await response.json();
+    return data;
+}
 
 export async function createLead(data) {
     const response = await fetch(url, {
@@ -26,12 +34,34 @@ export async function createLead(data) {
     });
 
     if (!response.ok) {
-        alert('something went wrong');
+        alert('Something went wrong!');
     }
 
     const rVal = await response.json();
+    return rVal;
+}
 
-    console.log(rVal);
+export async function updateLead(data, id) {
+    const response = await fetch(url + '/' + id, {
+        method: 'PUT',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+    if (!response.ok) {
+        alert('Something went wrong!');
+    }
+    const rVal = await response.json();
+    return rVal;
+}
 
+export async function deleteLead(id) {
+    const response = await fetch(url + '/' + id, {
+        method: 'DELETE',
+        headers: { 'Content-type': 'application/json' }
+    });
+    if (!response.ok) {
+        alert('Something went wrong!');
+    }
+    const rVal = await response.json();
     return rVal;
 }
