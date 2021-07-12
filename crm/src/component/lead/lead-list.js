@@ -52,6 +52,7 @@ const LeadList = () => {
                         </td>
                     </tr >);
                 tblLead.push(temp);
+                return null;
             });
             setLead(tblLead);
         };

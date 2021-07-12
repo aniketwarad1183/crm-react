@@ -1,4 +1,4 @@
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useRef } from "react";
 import AddLead from "./add-lead";
 import UpdateLead from "./update-lead";
 
@@ -84,36 +84,20 @@ const LeadForm = (props) => {
                                         <label>First Name:</label>
                                         <input type="text" className={"form-control"}
                                             placeholder="Enter first name" ref={first_name} />
-                                        {/* <span>First name is required</span>
-                                        <span>Enter valid first name</span> */}
                                     </div>
                                     <div className={"col-sm-6 form-group"}>
                                         <label>Last Name:</label>
                                         <input type="text" className={"form-control"}
                                             placeholder="Enter last name" ref={last_name} />
-                                        {/* <span>Last name is required</span>
-                                        <span>Enter valid last name</span> */}
                                     </div>
                                     <div className={"col-sm-6 form-group"}>
                                         <label>Email:</label>
                                         <input type="text" className={"form-control"} placeholder="Enter email" ref={email} />
-                                        {/* <span>
-                                            Email is required
-                                        </span >
-                                        <span >
-                                            Enter valid email
-                                        </span > */}
                                     </div >
                                     <div className={"col-sm-6 form-group"}>
                                         <label>Mobile:</label>
                                         <input type="text" maxLength="10" className={"form-control"}
                                             placeholder="Enter mobile number" ref={mobile} />
-                                        {/* <span>
-                                            Mobile number is required
-                                        </span >
-                                        <span >
-                                            Enter valid mobile number
-                                        </span > */}
                                     </div >
                                     <div className={"col-sm-6 form-group"}>
                                         <label>Gender:</label>
@@ -123,9 +107,6 @@ const LeadForm = (props) => {
                                             <option value="F">Female</option>
                                             <option value="O">Other</option>
                                         </select >
-                                        {/* <span >
-                                            Gender is required
-                                        </span > */}
                                     </div >
                                     <div className={"col-sm-6 form-group"}>
                                         <label>Country:</label>
@@ -133,9 +114,6 @@ const LeadForm = (props) => {
                                             <option value='null'>-- Select Country --</option>
                                             <option value="1">India</option>
                                         </select >
-                                        {/* <span >
-                                            Country is required
-                                        </span > */}
                                     </div >
                                     <div className={"col-sm-6 form-group"} >
                                         <label>State:</label>
@@ -146,9 +124,6 @@ const LeadForm = (props) => {
                                             <option value="3">Punjab</option>
                                             <option value="4">Bihar</option>
                                         </select >
-                                        {/* <span  >
-                                            State is required
-                                        </span > */}
                                     </div >
                                     <div className={"col-sm-6 form-group"}>
                                         <label>City:</label>
@@ -159,28 +134,16 @@ const LeadForm = (props) => {
                                             <option value="2">Mumbai</option>
                                             <option value="3">Surat</option>
                                         </select >
-                                        {/* <span>
-                                            City is required
-                                        </span > */}
                                     </div >
                                     <div className={"col-sm-6 form-group"}>
                                         <label>Zip Code:</label>
                                         <input type="text" className={"form-control"}
                                             placeholder="Enter Zip code" ref={zipcode} />
-                                        {/* <span >
-                                            Zip code is required
-                                        </span >
-                                        <span >
-                                            Enter valid Zip code
-                                        </span > */}
                                     </div >
                                     <div className={"col-sm-12 form-group"}>
                                         <label>Address:</label>
                                         <textarea rows="3" className={"form-control"}
                                             placeholder="Enter Address" ref={address} ></textarea>
-                                        {/* <span>
-                                            Address is required
-                                        </span > */}
                                     </div >
                                     {!props.isUpdate && <AddLead ref={addLeadChildRef} />}
                                     {props.isUpdate && <UpdateLead ref={updateLeadChildRef} />}

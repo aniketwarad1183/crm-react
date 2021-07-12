@@ -3,8 +3,6 @@ import { createLead } from "../../services/lead";
 
 const AddLead = forwardRef((props, ref) => {
 
-    let lead = props.formData;
-
     useImperativeHandle(ref, () => ({
         async createLead(employeeData) {
             const response = await createLead(employeeData);
