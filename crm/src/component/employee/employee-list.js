@@ -1,6 +1,8 @@
 import { Fragment, useEffect, useState } from "react";
 import EmployeeForm from "./employee-form";
 import { deleteEmployee, getEmployee, getSingleEmployee } from '../../services/employee';
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 
 const EmployeeList = () => {
 
@@ -41,9 +43,9 @@ const EmployeeList = () => {
                         <td>{item.city_name}</td>
                         <td className={"table-buttonicon"}>
                             <span style={{ "color": " #007BFF" }} data-toggle="modal" data-target="#EmployeeFormModal"
-                                onClick={() => updateEmployeeHandler(item.employee_id)} className={"fa fa-pencil mr-2"} >E</span>
+                                onClick={() => updateEmployeeHandler(item.employee_id)} className={"fa fa-pencil mr-2"} ><EditOutlinedIcon /></span>
                             <span style={{ "color": "red" }} data-toggle="modal" data-target="#deleteModal"
-                                onClick={() => deleteEmployeeHandler(item.employee_id)} className={"fa fa-trash"}>X</span>
+                                onClick={() => deleteEmployeeHandler(item.employee_id)} className={"fa fa-trash"}><DeleteOutlinedIcon /></span>
                         </td>
                     </tr>);
                 tblEmployee.push(temp);

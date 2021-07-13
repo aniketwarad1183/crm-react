@@ -34,7 +34,7 @@ const EmployeeForm = (props) => {
         zipcode.current.value = props.formDataForUpdate.zipcode;
     }
 
-    const submitEmployeeHandler = (event, form) => {
+    const submitEmployeeHandler = (event) => {
         event.preventDefault();
 
         const employeeData = {
